@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pac-man Roge</title>
+  <title>Juego de Sofi</title>
   <style>
     body {
       margin: 0;
@@ -27,16 +27,19 @@
       max-width: 300px;
       image-rendering: pixelated;
     }
+    /* Controles en forma de cruz usando CSS Grid */
     #controls {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 10px;
       margin-top: 20px;
+      justify-items: center;
+      align-items: center;
     }
     .btn {
       width: 60px;
       height: 60px;
-      margin: 5px;
       background: #ffcc00;
       border: none;
       border-radius: 10px;
@@ -44,6 +47,23 @@
       font-weight: bold;
       cursor: pointer;
       user-select: none;
+    }
+    /* Posicionamiento de cada botón dentro de la grilla */
+    .btn-up {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+    .btn-left {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+    .btn-down {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+    .btn-right {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
     }
     @media (max-width: 400px) {
       .btn {
@@ -55,13 +75,17 @@
   </style>
 </head>
 <body>
-  <h1>Juego de Sofi</h1>
+  <h1>Pac-Man de Roge</h1>
   <canvas id="gameCanvas" width="300" height="300"></canvas>
   <div id="controls">
-    <button class="btn" onclick="move('up')">⬆️</button><br>
-    <button class="btn" onclick="move('left')">⬅️</button>
-    <button class="btn" onclick="move('down')">⬇️</button>
-    <button class="btn" onclick="move('right')">➡️</button>
+    <button class="btn btn-up" onclick="move('up')">⬆️</button>
+    <button class="btn btn-left" onclick="move('left')">⬅️</button>
+    <button class="btn btn-down" onclick="move('down')">⬇️</button>
+    <button class="btn btn-right" onclick="move('right')">➡️</button>
+  </div>
+  
+  <div id="cupon" style="opacity: 0; visibility: hidden; background: #fff; color: #000; padding: 20px; border-radius: 10px; margin-top: 20px; font-size: 1.2rem; text-align: center; transition: opacity 0.5s ease-in-out;">
+   Este cupón vale por una visita al cine para ver Karate Kid (Solo si eres Sofi). 🌟
   </div>
 
   <script>
@@ -223,7 +247,7 @@
       }
     }
 
-    // Función para asignar la dirección mediante controles en pantalla
+    // Función para asignar la dirección mediante los controles en pantalla
     function move(dir) {
       direction = dir;
     }
